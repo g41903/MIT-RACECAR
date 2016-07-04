@@ -1,0 +1,6 @@
+set(visual_servoing_SETUP_PY_VERSION "0.0.0")
+set(visual_servoing_SETUP_PY_SCRIPTS "")
+set(visual_servoing_SETUP_PY_PACKAGES "visual_servoing")
+set(visual_servoing_SETUP_PY_PACKAGE_DIRS "src/visual_servoing")
+set(visual_servoing_SETUP_PY_MODULES "")
+set(visual_servoing_SETUP_PY_MODULE_DIRS "")

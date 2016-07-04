@@ -1,0 +1,6 @@
+set(monte_carlo_localization_SETUP_PY_VERSION "0.0.0")
+set(monte_carlo_localization_SETUP_PY_SCRIPTS "")
+set(monte_carlo_localization_SETUP_PY_PACKAGES "monte_carlo_localization")
+set(monte_carlo_localization_SETUP_PY_PACKAGE_DIRS "src/monte_carlo_localization")
+set(monte_carlo_localization_SETUP_PY_MODULES "")
+set(monte_carlo_localization_SETUP_PY_MODULE_DIRS "")

@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: racecar_description
+Description: Description of racecar_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/install/lib 
+Requires: 

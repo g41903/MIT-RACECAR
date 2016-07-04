@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "ros_numpy")
+set(ros_numpy_MAINTAINER "Eric Wieser <wieser@mit.edu>")
+set(ros_numpy_DEPRECATED "")
+set(ros_numpy_VERSION "0.0.2")
+set(ros_numpy_BUILD_DEPENDS )
+set(ros_numpy_RUN_DEPENDS "python-numpy" "rospy" "sensor_msgs" "nav_msgs" "geometry_msgs" "tf")
+set(ros_numpy_BUILDTOOL_DEPENDS "catkin")

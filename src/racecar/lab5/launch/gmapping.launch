@@ -1,0 +1,31 @@
+<launch>
+  <arg name="which" default="tunnel1" />
+
+  <!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
+
+  <param name="use_sim_time" value="true" />
+
+  <node name="simulator_tf_alias" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 /base_link /chassis" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser"
+        args="0.265 0.0 0.145 0.0 0.0 0.0 1.0 /base_link /laser 20Hz" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d '$(find lab5)/rviz/gmapping.rviz'" />
+
+  <node pkg="gmapping" type="slam_gmapping" name="mapper" output="screen">
+    <param name="~map_update_interval" value="0.25" />
+    <param name="~particles" value="100" />
+    <param name="~linearUpdate" value="0.1" />
+    <param name="~angularUpdate" value="0.05" />
+    <param name="~maxURange" value="8" /> <!-- <10 -->
+    <param name="~maxRange" value="10" />
+  </node>
+
+  <node pkg="rosbag" type="play" name="player"
+          args="$(env HOME)/team-ws/bags/mapping/$(arg which).bag --clock -r 0.05">
+    <remap from='/tf_static' to='~gmapping_is_dumb_and_cant_use_this' />
+    <!-- <remap from='/tf' to='~this_is_not_used_either' /> -->
+  </node>
+
+</launch>

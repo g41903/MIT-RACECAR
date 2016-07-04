@@ -1,0 +1,26 @@
+<launch>
+  <!-- Don't use this launch file. It's here for reference until we're sure the new isn't broken. -->
+  <group ns="wall_follow">
+    <node pkg="reflexive_control" name="scan_parser_node" type="scan_parser.py"/>
+    <node pkg="reflexive_control" name="object_detector_node" type="object_detection.py"/>
+    <node pkg="reflexive_control" name="safety_controller_node" type="safety_controller.py"/>
+    <!-- Make the driver safe by passing all output through the killswitch -->
+    <node pkg="reflexive_control" name="driver_node" type="driver.py">
+      <remap from="/racecar/ackermann_cmd_mux/input/teleop" to="/racecar/ackermann_cmd_mux/input/teleop/safed" />
+    </node>
+
+    <!-- Wall detectors -->
+    <node pkg="reflexive_control" name="left_wall_detector" type="wall_detector.py">
+      <remap from="laser/scan" to="/racecar/laser/scan/left"/>
+      <remap from="wall_detection" to="/racecar/wall_detection/left"/>
+    </node>
+    <node pkg="reflexive_control" name="right_wall_detector" type="wall_detector.py">
+      <remap from="laser/scan" to="/racecar/laser/scan/right"/>
+      <remap from="wall_detection" to="/racecar/wall_detection/right"/>
+    </node>
+    <node pkg="reflexive_control" name="front_wall_detector" type="wall_detector.py">
+      <remap from="laser/scan" to="/racecar/laser/scan/front"/>
+      <remap from="wall_detection" to="/racecar/wall_detection/front"/>
+    </node>
+  </group>
+</launch>

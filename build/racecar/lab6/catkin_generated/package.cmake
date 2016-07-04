@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "lab6")
+set(lab6_MAINTAINER "Tokyo drift <tokyodrift@mit.edu>")
+set(lab6_DEPRECATED "")
+set(lab6_VERSION "0.0.0")
+set(lab6_BUILD_DEPENDS "amcl" "geometry_msgs" "map_server" "nav_msgs" "ros_numpy" "rospy" "std_msgs")
+set(lab6_RUN_DEPENDS "amcl" "geometry_msgs" "map_server" "nav_msgs" "ros_numpy" "rospy" "std_msgs")
+set(lab6_BUILDTOOL_DEPENDS "catkin")

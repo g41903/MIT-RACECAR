@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/devel
+
+Name: lab5
+Description: Description of lab5
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/devel/lib 
+Requires: 

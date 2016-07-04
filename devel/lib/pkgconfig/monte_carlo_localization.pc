@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/devel
+
+Name: monte_carlo_localization
+Description: Description of monte_carlo_localization
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/devel/lib 
+Requires: 

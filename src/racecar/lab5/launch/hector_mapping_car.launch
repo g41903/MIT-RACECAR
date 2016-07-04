@@ -1,0 +1,17 @@
+<launch>
+  <arg name="which" default="tunnel1" />
+
+  <!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
+  <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" /> -->
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser"
+        args="0.265 0.0 0.145 0.0 0.0 0.0 1.0 /base_link /laser 20Hz" />
+
+   <include file="$(find hector_mapping)/launch/mapping_default.launch">
+    <arg name="pub_map_odom_transform" value="true"/>
+    <!-- <arg name="map_frame" value="map" /> -->
+    <arg name="base_frame" value="base_link" />
+    <arg name="odom_frame" value="odom" />
+  </include>
+
+</launch>

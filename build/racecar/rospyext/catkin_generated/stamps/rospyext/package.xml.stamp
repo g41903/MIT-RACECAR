@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>rospyext</name>
+  <version>0.0.0</version>
+  <description>Provides a more pythonic API for writing simple ROS nodes</description>
+
+  <maintainer email="wieser@mit.edu">Eric Wieser</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>rospy</run_depend>
+</package>

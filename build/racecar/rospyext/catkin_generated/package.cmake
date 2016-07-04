@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "rospyext")
+set(rospyext_MAINTAINER "Eric Wieser <wieser@mit.edu>")
+set(rospyext_DEPRECATED "")
+set(rospyext_VERSION "0.0.0")
+set(rospyext_BUILD_DEPENDS "rospy")
+set(rospyext_RUN_DEPENDS "rospy")
+set(rospyext_BUILDTOOL_DEPENDS "catkin")

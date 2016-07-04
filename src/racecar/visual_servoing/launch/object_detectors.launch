@@ -1,0 +1,28 @@
+<!-- object_detectors.launch -->
+<launch>
+  <group ns="lab4a">
+    <node pkg="visual_servoing" name="cone_thresholder" type="color_thresholder.py">
+      <remap from="~image" to="/camera/zed/rgb/image_rect_color" />
+      <remap from="~mask" to="/tokyo/cone_mask" />
+      <param name="~pixel_file" value='$(find visual_servoing)/calib_data.npy' />
+    </node>
+    <node pkg="visual_servoing" name="marker_thresholder" type="color_thresholder.py">
+      <remap from="~image" to="/camera/zed/rgb/image_rect_color" />
+      <remap from="~mask" to="/tokyo/marker_mask" />
+      <param name="~pixel_file" value='$(find visual_servoing)/marker_data2.npy' />
+    </node>
+    <node pkg="visual_servoing" name="cone_locator" type="cone_locator.py" output="screen">
+      <remap from="cone_point" to="/tokyo/cone_point" />
+      <remap from="cone_size" to="/tokyo/cone_size" />
+      <remap from="~cone_mask" to="/tokyo/marker_mask" />
+      <remap from="~cone_depth" to="/camera/zed/depth/image_rect" />
+      <remap from="~cone_mask_info" to="/camera/zed/rgb/camera_info" />
+      <remap from="~cone" to="/tokyo/marker" />
+    </node>
+    <node pkg="visual_servoing" name="marker_locator" type="marker_locator.py" output="screen">
+      <remap from="~mask" to="/tokyo/marker_mask" />
+      <remap from="~mask_info" to="/camera/zed/rgb/camera_info" />
+      <remap from="~location" to="/tokyo/marker" />
+    </node>
+  </group>
+</launch>

@@ -1,0 +1,24 @@
+<launch>
+  <group ns="lab4a">
+    <node pkg="visual_servoing" name="cone_thresholder" type="cone_thresholder.py">
+      <remap from="~image" to="/camera/zed/rgb/image_rect_color" />
+      <remap from="~cone_mask" to="/tokyo/cone_mask" />
+    </node>
+    <node pkg="visual_servoing" name="cone_locator" type="cone_locator.py" output="screen">
+      <remap from="~cone_mask" to="/tokyo/cone_mask" />
+      <remap from="~cone_depth" to="/camera/zed/depth/image_rect" />
+      <remap from="~cone_mask_info" to="/camera/zed/rgb/camera_info" />
+      <remap from="~cone" to="/tokyo/cone" />
+    </node>
+    <node pkg="visual_servoing" name="driver" type="cone_swerve_driver.py" output="screen">
+      <remap from="~cone" to="/tokyo/cone" />
+    </node>
+
+    <!-- Let's make a node that debugs the propagation delay of the cone_thresholder start to finish. -->
+    <node pkg="visual_servoing" name="debug_cone_thresholder_lag" type="topic_lag_debug">
+      <param name="upstream_topic" value="/lab4a/cone_thresholder/debug/packet_entered_node" />
+      <param name="downstream_topic" value="/lab4a/cone_locator/debug/packet_entered_node" />
+      <param name="output_topic" value="/lab4a/cone_thresholder/debug/processing_lag" />
+    </node>
+  </group>
+</launch>

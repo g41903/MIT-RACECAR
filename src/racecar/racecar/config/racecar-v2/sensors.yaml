@@ -1,0 +1,8 @@
+
+laser_node:
+  ip_address: 192.168.0.10
+  angle_min: -2.0943951023931953 # 120 degrees
+  angle_max: 2.0943951023931953
+
+imu_node:
+  device: /dev/imu

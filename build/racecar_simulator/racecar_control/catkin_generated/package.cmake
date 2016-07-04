@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "racecar_control")
+set(racecar_control_MAINTAINER "ubuntu <ubuntu@todo.todo>")
+set(racecar_control_DEPRECATED "")
+set(racecar_control_VERSION "0.0.0")
+set(racecar_control_BUILD_DEPENDS )
+set(racecar_control_RUN_DEPENDS )
+set(racecar_control_BUILDTOOL_DEPENDS "catkin")

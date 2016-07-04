@@ -1,0 +1,28 @@
+<launch>
+  <arg name="drive" default="true" doc="whether to enable drive control"/>
+
+  <group ns="wander">
+    <node pkg="reflexive_control" name="scan_parser_node" type="scan_parser.py"/>
+    <node pkg="reflexive_control" name="object_detector_node" type="object_detection.py"/>
+    <node pkg="reflexive_control" name="safety_controller_node" type="safety_controller.py"/>
+    <node pkg="reflexive_control" name="wander_finder_node" type="wander_finder.py">
+      <remap from="~angle" to="/tokyo/wander_angle"/>
+      <remap from="~too_close" to="/tokyo/wander_too_close"/>
+    </node>
+    <node pkg="reflexive_control" name="wander_driver_node" type="wander_driver.py" if="$(arg drive)"/>
+
+    <!-- Wall detectors -->
+    <node pkg="reflexive_control" name="left_wall_detector" type="wall_detector.py">
+      <remap from="laser/scan" to="/tokyo/laser/scan/left"/>
+      <remap from="wall_detection" to="/tokyo/wall_detection/left"/>
+    </node>
+    <node pkg="reflexive_control" name="right_wall_detector" type="wall_detector.py">
+      <remap from="laser/scan" to="/tokyo/laser/scan/right"/>
+      <remap from="wall_detection" to="/tokyo/wall_detection/right"/>
+    </node>
+    <node pkg="reflexive_control" name="front_wall_detector" type="wall_detector.py">
+      <remap from="laser/scan" to="/tokyo/laser/scan/front"/>
+      <remap from="wall_detection" to="/tokyo/wall_detection/front"/>
+    </node>
+  </group>
+</launch>

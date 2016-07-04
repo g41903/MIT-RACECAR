@@ -1,0 +1,6 @@
+<launch>
+  <!-- This launch file only works on the racecar! -->
+  <group ns="motor_test">
+    <node pkg="reflexive_control" name="dumb_driver_node" type="dumb_driver.py"/>
+  </group>
+</launch>

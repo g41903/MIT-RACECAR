@@ -1,0 +1,17 @@
+<!-- This file creates a simple path and runs the car against the path in Gazebo. -->
+
+<launch>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_mapper"
+        args="0 0 0 0 0 0 1 map odom" />
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/sim_tunnels.yaml" required="true" />
+
+  <!-- use rviz as the gui instead of gazebo -->
+  <include file="$(find racecar_gazebo)/launch/racecar.launch">
+    <arg name="world_name" value="racecar_tunnel" />
+    <arg name="gui" value="false" />
+  </include>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d '$(find lab5)/rviz/path_follow.rviz'" required="true" />
+
+  <include file="$(find lab5)/launch/path_follower_sim.launch" />
+  <node pkg="lab6" type="path_tracker.py" name="path_tracker" />
+</launch>

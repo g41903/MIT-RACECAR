@@ -1,0 +1,29 @@
+
+# erpm (electrical rpm) = 3000 * speed (meters / second) + 0
+speed_to_erpm_gain: 4600
+speed_to_erpm_offset: 0.0
+
+# servo value (0 to 1) =  -1.4 * steering angle (radians) + 0.5
+steering_angle_to_servo_gain: -1.25
+steering_angle_to_servo_offset: 0.540
+
+# publish odom to base link tf
+vesc_to_odom/publish_tf: true
+
+# car wheelbase is about 25cm
+wheelbase: .25
+
+vesc_driver:
+  port: /dev/ttyACM0
+  duty_cycle_min: 0.0
+  duty_cycle_max: 0.0
+  current_min: 0.0
+  current_max: 0.0
+  brake_min: 0.0
+  brake_max: 0.0
+  speed_min: -18400
+  speed_max: 18400
+  position_min: 0.0
+  position_max: 0.0
+  servo_min: 0.17
+  servo_max: 0.90

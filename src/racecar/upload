@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+echo "Uploading to robot..."
+echo ""
+rsync --cvs-exclude .git -avP /home/racecar/racecar_team5_ws/src/racecar/ racecar-51:racecar_team5_ws/src/racecar/
+echo ""
+echo "Upload complete."
+echo "Note: This did not upload the .git dir. Git will be confused"
+echo "Note: This did not delete any files. Old files may exist on the racecar.\n"

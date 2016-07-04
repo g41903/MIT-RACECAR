@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: pwm_sysfs_driver
+Description: Description of pwm_sysfs_driver
+Version: 0.0.1
+Cflags: -I/home/racecar/team-ws/install/include
+Libs: -L/home/racecar/team-ws/install/lib -lpwm_sysfs_driver -lpwm_sysfs_driver_nodelet -lservo_driver_nodelet
+Requires: roscpp std_msgs pluginlib nodelet

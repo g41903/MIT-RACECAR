@@ -1,0 +1,7 @@
+<launch>
+  <!-- send cylinder_object.xml to param server -->
+  <param name="object_description" command="$(find racecar_description)/urdf/cylinder_object.urdf.xacro" />
+
+  <!-- push cylinder_object_description to factory and spawn robot in gazebo -->
+  <node name="spawn_object" pkg="gazebo_ros" type="spawn_model" args="-urdf -param object_description -z 1 -model cylinder" respawn="false" output="screen" /> 
+</launch>

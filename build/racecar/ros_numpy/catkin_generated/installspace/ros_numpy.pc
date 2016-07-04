@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: ros_numpy
+Description: Description of ros_numpy
+Version: 0.0.2
+Cflags: 
+Libs: -L/home/racecar/team-ws/install/lib 
+Requires: 

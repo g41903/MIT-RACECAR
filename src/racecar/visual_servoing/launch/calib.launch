@@ -1,0 +1,16 @@
+<launch>
+  <group ns="lab4a">
+<!--     <node pkg="rosbag" type="play" name="player"
+          args="$(env HOME)/team-ws/bags/2016-02-26-20-16-28-coneshadow.bag" output="screen"/>
+    <node pkg="visual_servoing" name="cone_calib" type="cone_calib.py" output="screen"> -->
+    <node pkg="rosbag" type="play" name="player"
+          args="$(env HOME)/team-ws/bags/mapping/tunnel_near.bag" output="screen"/>
+    <node pkg="visual_servoing" name="cone_calib" type="cone_calib.py" output="screen">
+<!--       <param name="~mask_fname" value='$(find visual_servoing)/calib_mask.png' />
+      <param name="~data_fname" value='$(find visual_servoing)/calib_data.npy' /> -->
+      <param name="~mask_fname" value='$(find visual_servoing)/tunnel_near_marker_mask.png' />
+      <param name="~data_fname" value='$(find visual_servoing)/tunnel_near_marker_data.npy' />
+      <remap from="image" to="/camera/zed/rgb/image_rect_color" />
+    </node>
+  </group>
+</launch>

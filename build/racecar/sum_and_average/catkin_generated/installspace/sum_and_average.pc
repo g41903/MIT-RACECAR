@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: sum_and_average
+Description: Description of sum_and_average
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/install/lib 
+Requires: 

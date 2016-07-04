@@ -1,0 +1,7 @@
+<launch>
+  <!-- Remaps that make the real car have topics like the simulator. -->
+  <remap from="/racecar/ackermann_cmd_mux/input/safety" to="/vesc/ackermann_cmd_mux/input/safety"/>
+  <remap from="/racecar/ackermann_cmd_mux/input/navigation" to="/vesc/ackermann_cmd_mux/input/navigation"/>
+  <remap from="/racecar/laser/scan" to="/scan"/>
+  <include file="$(find reflexive_control)/launch/motor_test_sim.launch" />
+</launch>

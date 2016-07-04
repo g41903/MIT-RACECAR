@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "cone_detector")
+set(cone_detector_MAINTAINER "Ari <aanders@mit.edu>")
+set(cone_detector_DEPRECATED "")
+set(cone_detector_VERSION "0.0.0")
+set(cone_detector_BUILD_DEPENDS "roscpp" "rospy" "std_msgs" "image_transport" "cv_bridge" "sensor_msgs" "geometry_msgs")
+set(cone_detector_RUN_DEPENDS "roscpp" "rospy" "std_msgs" "image_transport" "sensor_msgs" "cv_bridge" "geometry_msgs")
+set(cone_detector_BUILDTOOL_DEPENDS "catkin")

@@ -1,0 +1,8 @@
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+*.pyc
+calib_data.npy
+
+# Ignore stats
+lab6/rrt_stats.txt

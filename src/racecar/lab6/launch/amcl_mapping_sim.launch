@@ -1,0 +1,43 @@
+<launch>
+  <arg name="which" default="rlev1" />
+
+  <param name="use_sim_time" value="true" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d '$(find lab6)/rviz/amcl_mapping_sim.rviz'" />
+
+  <node pkg="rosbag" type="play" name="player"
+        args="$(env HOME)/team-ws/bags/mapping/$(arg which).bag --clock">
+    <!-- <remap from='/tf' to='~we_now_find_this_ourselves' /> -->
+    <remap from="/vesc/odom" to="/vesc/odom_no_cov" />
+    <!-- todo: disasble vesc from outputting the odom frame -->
+  </node>
+
+  <!-- run the map -->
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/$(arg which).yaml" required="true" />
+
+  <!-- pubish robot tfs -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
+  <node pkg="robot_state_publisher" type="state_publisher" name="state_publisher" />
+
+  <!--- Run AMCL -->
+  <include file="$(find amcl)/examples/amcl_diff.launch" />
+
+  <!--node pkg="monte_carlo_localization" type="localizer.py" name="localizer" output="screen">
+    <remap from="~map" to="/map" />
+    <remap from="~odom" to="/vesc/odom" />
+    <remap from="~scan" to="/scan" />
+    <param name="~publish_cloud" value="True" />
+  </node-->
+
+  <!-- add covariance information to the odom -->
+  <!--node pkg="lab5" type="covariance_fixer.py" name="covariance_fixer">
+    <remap from="~broken" to="/vesc/odom_no_cov" />
+    <remap from="~fixed" to="/vesc/odom" />
+  </node-->
+
+  <node pkg="lab6" type="local_mapper.py" name="local_mapper" output="screen">
+    <remap from="~global_map" to="/map" />
+    <remap from="~local_map" to="/local_map" />
+    <remap from="~scan" to="/scan" />
+  </node>
+</launch>

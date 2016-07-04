@@ -1,0 +1,29 @@
+<launch>
+  <arg name="which" default="rlev1" />
+  <arg name="use_ackermann_rrt" default="0" />
+
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/$(arg which).yaml" required="true" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
+
+  <!-- <node pkg="lab6" type="interactive_pose2d_tf.py" name="interactive_pose2d_tf">
+    <remap from="~color" to="/robot_marker_color" />
+  </node> -->
+
+  <node pkg="lab6" type="rrt.py" name="rrt_planner" output="screen">
+    <remap from="~map" to="/map" />
+    <remap from="~path" to="/robot_path" />
+    <param name="~use_ackermann_rrt" value="1" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d '$(find lab6)/rviz/sim.rviz'" required="true" />
+
+  <!-- Boot up gazebo -->
+  <arg name="drive" default="true" doc="whether to enable drive control"/>
+  <group ns="path_follower">
+    <node pkg="lab5" name="path_follower_node" type="path_follower.py" if="$(arg drive)">
+      <remap from="~path" to="/robot_path" />
+    </node>
+  </group>
+  <node name="simulator_tf_alias" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 /map /odom" />
+</launch>

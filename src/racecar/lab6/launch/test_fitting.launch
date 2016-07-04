@@ -1,0 +1,18 @@
+<launch>
+  <arg name="which" default="rlev1" />
+
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/$(arg which).yaml" required="true" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
+
+  <node pkg="lab6" type="interactive_pose2d_tf.py" name="interactive_pose2d_tf">
+    <remap from="~color" to="/robot_marker_color" />
+  </node>
+
+  <node pkg="lab6" type="test_racecar_fit.py" name="test_racecar_fit" output="screen">
+    <remap from="~map" to="/map" />
+    <remap from="~color" to="/robot_marker_color" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d '$(find lab6)/rviz/fitting.rviz'" />
+</launch>

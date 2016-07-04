@@ -1,0 +1,21 @@
+<launch>
+  <group ns="lab4a">
+    <node pkg="visual_servoing" name="cone_thresholder" type="color_thresholder.py">
+      <remap from="~image" to="/camera/zed/rgb/image_rect_color" />
+      <remap from="~mask" to="/tokyo/cone_mask" />
+      <param name="~object_data" value='$(find visual_servoing)/calib_data.npy' />
+    </node>
+    <node pkg="visual_servoing" name="cone_locator" type="cone_locator.py">
+<!--       <remap from="~cone_mask" to="/tokyo/cone_mask" />
+      <remap from="~cone_depth" to="/camera/zed/depth_registered/image_raw" />
+      <remap from="~cone" to="/tokyo/cone" /> -->
+      
+      <remap from="cone_point" to="/tokyo/cone_point" />
+      <remap from="cone_size" to="/tokyo/cone_size" />
+      <remap from="~cone_mask" to="/tokyo/cone_mask" />
+      <remap from="~cone_depth" to="/camera/zed/depth/image_rect" />
+      <remap from="~cone_mask_info" to="/camera/zed/rgb/camera_info" />
+      <remap from="~cone" to="/tokyo/cone" />
+    </node>
+  </group>
+</launch>

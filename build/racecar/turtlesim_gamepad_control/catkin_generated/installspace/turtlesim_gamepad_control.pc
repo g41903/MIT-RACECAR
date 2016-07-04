@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: turtlesim_gamepad_control
+Description: Description of turtlesim_gamepad_control
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/install/lib 
+Requires: 

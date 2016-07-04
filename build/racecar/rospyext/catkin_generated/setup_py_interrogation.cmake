@@ -1,0 +1,6 @@
+set(rospyext_SETUP_PY_VERSION "0.0.0")
+set(rospyext_SETUP_PY_SCRIPTS "")
+set(rospyext_SETUP_PY_PACKAGES "rospyext")
+set(rospyext_SETUP_PY_PACKAGE_DIRS "src/rospyext")
+set(rospyext_SETUP_PY_MODULES "")
+set(rospyext_SETUP_PY_MODULE_DIRS "")

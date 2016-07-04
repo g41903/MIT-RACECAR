@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "monte_carlo_localization")
+set(monte_carlo_localization_MAINTAINER "racecar <racecar@todo.todo>")
+set(monte_carlo_localization_DEPRECATED "")
+set(monte_carlo_localization_VERSION "0.0.0")
+set(monte_carlo_localization_BUILD_DEPENDS "geometry_msgs" "nav_msgs" "rospy" "std_msgs")
+set(monte_carlo_localization_RUN_DEPENDS "geometry_msgs" "nav_msgs" "rospy" "std_msgs")
+set(monte_carlo_localization_BUILDTOOL_DEPENDS "catkin")

@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: apriltags
+Description: Description of apriltags
+Version: 0.0.2
+Cflags: -I/home/racecar/team-ws/install/include
+Libs: -L/home/racecar/team-ws/install/lib 
+Requires: cv_bridge std_msgs sensor_msgs image_transport roscpp geometry_msgs

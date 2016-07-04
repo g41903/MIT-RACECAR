@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "vesc_driver")
+set(vesc_driver_MAINTAINER "Michael T. Boulet <boulet@ll.mit.edu>")
+set(vesc_driver_DEPRECATED "")
+set(vesc_driver_VERSION "0.0.1")
+set(vesc_driver_BUILD_DEPENDS "nodelet" "pluginlib" "roscpp" "std_msgs" "vesc_msgs" "serial")
+set(vesc_driver_RUN_DEPENDS "nodelet" "pluginlib" "roscpp" "std_msgs" "vesc_msgs" "serial")
+set(vesc_driver_BUILDTOOL_DEPENDS "catkin")

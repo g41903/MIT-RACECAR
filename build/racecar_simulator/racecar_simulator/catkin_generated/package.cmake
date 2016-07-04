@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "racecar_simulator")
+set(racecar_simulator_MAINTAINER "Abhishek Agarwal <abhia@mit.edu>")
+set(racecar_simulator_DEPRECATED "")
+set(racecar_simulator_VERSION "0.0.1")
+set(racecar_simulator_BUILD_DEPENDS )
+set(racecar_simulator_RUN_DEPENDS )
+set(racecar_simulator_BUILDTOOL_DEPENDS "catkin")

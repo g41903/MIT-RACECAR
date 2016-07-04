@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/devel
+
+Name: turtlesim_openloop_control
+Description: Description of turtlesim_openloop_control
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/devel/lib 
+Requires: 

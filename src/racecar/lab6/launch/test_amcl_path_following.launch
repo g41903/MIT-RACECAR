@@ -1,0 +1,14 @@
+<launch>
+  <remap from="/racecar/ackermann_cmd_mux/input/navigation" to="/vesc/ackermann_cmd_mux/input/navigation" />
+  <arg name="which" default="rlev1" />
+
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/$(arg which).yaml" required="true" />
+
+  <!--- Run AMCL -->
+  <include file="$(find amcl)/examples/amcl_diff.launch" />
+
+  <!-- Create a test path that runs around the RLE building -->
+  <include file="$(find lab5)/launch/path_follower_sim.launch">
+
+
+</launch>

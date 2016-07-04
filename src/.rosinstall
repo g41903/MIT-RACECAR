@@ -1,0 +1,9 @@
+- git:
+    local-name: racecar
+    uri: git@github.mit.edu:rss2016-team5/racecar.git
+- git:
+    local-name: racecar_simulator
+    uri: git@github.mit.edu:rss2016-team5/racecar_simulator.git
+- git:
+    local-name: vesc
+    uri: git@github.mit.edu:rss2016-team5/vesc.git

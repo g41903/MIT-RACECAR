@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "ackermann_cmd_mux")
+set(ackermann_cmd_mux_MAINTAINER "Michael Boulet <boulet@ll.mit.edu>")
+set(ackermann_cmd_mux_DEPRECATED "")
+set(ackermann_cmd_mux_VERSION "0.7.0")
+set(ackermann_cmd_mux_BUILD_DEPENDS "roscpp" "nodelet" "dynamic_reconfigure" "pluginlib" "ackermann_msgs" "yaml-cpp")
+set(ackermann_cmd_mux_RUN_DEPENDS "roscpp" "ackermann_msgs" "pluginlib" "nodelet" "dynamic_reconfigure" "yaml-cpp")
+set(ackermann_cmd_mux_BUILDTOOL_DEPENDS "catkin")

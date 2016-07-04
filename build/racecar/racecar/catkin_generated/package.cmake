@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "racecar")
+set(racecar_MAINTAINER "Michael Boulet <boulet@ll.mit.edu>")
+set(racecar_DEPRECATED "")
+set(racecar_VERSION "0.0.1")
+set(racecar_BUILD_DEPENDS )
+set(racecar_RUN_DEPENDS "razor_imu_9dof" "tf" "tf2_ros" "urg_node" "joy" "joy_teleop" "laser_scan_matcher" "rosbag" "rostopic" "rviz" "gmapping" "hector_mapping" "robot_pose_ekf")
+set(racecar_BUILDTOOL_DEPENDS "catkin")

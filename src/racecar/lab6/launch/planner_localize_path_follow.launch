@@ -1,0 +1,34 @@
+<launch>
+  <arg name="which" default="tunnel_map_v4" />
+
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/$(arg which).yaml" required="true" />
+
+  <!--- Run AMCL -->
+  <include file="$(find lab6)/launch/amcl_diff.launch" />
+
+  <arg name="drive" default="true" doc="whether to enable drive control"/>
+
+  <group ns="path_follower">
+    <node pkg="lab5" name="path_follower_node" type="path_follower.py" if="$(arg drive)">
+      <remap from="~path" to="/path_follower/robot_path" />
+    </node>
+
+    <!-- Create a default test path -->
+    <node pkg="lab5" name="test_path_source" type="test_path_source.py" if="$(arg drive)" output="screen">
+      <remap from='~robot_path' to='/robot_path' />
+    </node>
+  </group>
+
+  <node pkg="lab6" type="not_rrt.py" name="rrt_planner">
+    <remap from="~path" to="/path_follower/robot_path" />
+  </node>
+
+  <node pkg="lab6" type="top_planner.py" name="top_planner" output="screen">
+    <remap from="~target_pose" to="rrt_planner/goal" />
+    <remap from="~map" to="map" />
+    <remap from="~scan" to="scan" />
+    <remap from="~path" to="/robot_path" />
+    <remap from="~marker_poses" to="/marker_poses" />
+  </node>
+
+</launch>

@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/install
+
+Name: lab6
+Description: Description of lab6
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/install/lib 
+Requires: 

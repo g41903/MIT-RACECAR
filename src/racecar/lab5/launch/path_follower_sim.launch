@@ -1,0 +1,16 @@
+<!-- This file creates a simple path and runs the car against the path in Gazebo. -->
+
+<launch>
+  <group ns="path_follower">
+    <node pkg="lab5" name="path_follower_node" type="path_follower.py" output="screen">
+      <param name="max_speed" value="1.0"/>
+      <param name="p_speed" value="2.0"/>
+      <remap from='~path' to='/lab5/robot_path' />
+    </node>
+
+    <!-- Create a default test path -->
+    <node pkg="lab5" name="test_path_source" type="test_path_source.py">
+      <remap from='~robot_path' to='/lab5/robot_path' />
+    </node>
+  </group>
+</launch>

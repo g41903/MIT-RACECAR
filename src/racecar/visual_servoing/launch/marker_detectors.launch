@@ -1,0 +1,36 @@
+<launch>
+  <arg name="usebag" default="false"/>
+  <!-- <arg name="pixel_file" default="marker_data.npy"/> -->
+  <arg name="lookup_file" default="marker_data2-lookup.npy"/>
+  <!-- <arg name="lookup_file" default="tunnel_near_marker_data-lookup-3-128.npy"/> -->
+  
+  <group if="$(arg usebag)">
+    <!-- <arg name="which" default="marker_x60_y0_z150_cm" /> -->
+    <arg name="which" default="tunnel_near" />
+    <param name="use_sim_time" value="true" />
+    <node pkg="rosbag" type="play" name="player"
+            args="$(env HOME)/team-ws/bags/mapping/$(arg which).bag -l --clock">
+          <remap from='/tf' to='~this_is_not_used_either' />
+          <remap from="/static_tf" to="/these_tfs_are_old" />`
+    </node>
+    <include file="$(find visual_servoing)/launch/zed_tf.launch" />
+    <!-- pubish robot tfs -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
+    <node pkg="robot_state_publisher" type="state_publisher" name="state_publisher" />
+  </group>
+
+  <node pkg="visual_servoing" name="color_thresholder" type="color_thresholder.py">
+    <remap from="~image" to="/camera/zed/rgb/image_rect_color" />
+    <remap from="~mask" to="/tokyo/object_mask" />
+    <!-- <param name="~object_data" value='$(find visual_servoing)/marker_data.npy' /> -->
+    <!-- <param name="~pixel_file" value='$(find visual_servoing)/tunnel_near_marker_data.npy' /> -->
+    <param name="~lookup_file" value='$(find visual_servoing)/$(arg lookup_file)'/>
+    <!-- <param name="pixel_file" value='$(find visual_servoing)/$(arg pixel_file)'/> -->
+  </node>
+
+  <node pkg="visual_servoing" name="marker_locator" type="marker_locator.py" output="screen" required="true">
+    <remap from="~mask" to="/tokyo/object_mask" />
+    <remap from="~mask_info" to="/camera/zed/rgb/camera_info" />
+    <remap from="~location" to="/tokyo/marker" />
+  </node>
+</launch>

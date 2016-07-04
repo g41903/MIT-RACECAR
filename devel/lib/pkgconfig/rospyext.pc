@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/devel
+
+Name: rospyext
+Description: Description of rospyext
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/devel/lib 
+Requires: 

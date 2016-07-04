@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "racecar_gazebo")
+set(racecar_gazebo_MAINTAINER "ubuntu <ubuntu@todo.todo>")
+set(racecar_gazebo_DEPRECATED "")
+set(racecar_gazebo_VERSION "0.0.0")
+set(racecar_gazebo_BUILD_DEPENDS "gazebo_ros")
+set(racecar_gazebo_RUN_DEPENDS "gazebo_ros")
+set(racecar_gazebo_BUILDTOOL_DEPENDS "catkin")

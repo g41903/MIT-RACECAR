@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/racecar/team-ws/src/racecar/monte_carlo_localization/src/map_range.c
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+

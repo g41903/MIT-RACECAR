@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/devel
+
+Name: visual_servoing
+Description: Description of visual_servoing
+Version: 0.0.0
+Cflags: -I/home/racecar/team-ws/devel/include
+Libs: -L/home/racecar/team-ws/devel/lib 
+Requires: sensor_msgs std_msgs geometry_msgs message_runtime

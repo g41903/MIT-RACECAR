@@ -1,0 +1,8 @@
+prefix=/home/racecar/team-ws/devel
+
+Name: cone_detector
+Description: Description of cone_detector
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/team-ws/devel/lib -lcone_detector
+Requires: 

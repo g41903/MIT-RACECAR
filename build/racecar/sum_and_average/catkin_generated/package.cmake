@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "sum_and_average")
+set(sum_and_average_MAINTAINER "Michael Boulet <boulet@ll.mit.edu>")
+set(sum_and_average_DEPRECATED "")
+set(sum_and_average_VERSION "0.1.0")
+set(sum_and_average_BUILD_DEPENDS "roscpp" "rospy" "std_msgs")
+set(sum_and_average_RUN_DEPENDS "roscpp" "rospy" "std_msgs")
+set(sum_and_average_BUILDTOOL_DEPENDS "catkin")

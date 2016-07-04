@@ -1,0 +1,101 @@
+<launch>
+  <arg name="which" default="tunnel_map_v4" />
+  <arg name="drive" default="false" />
+  <arg name="run_RRT" default="true" />
+  <arg name="run_amcl" default="true" />
+  <arg name="run_high_level" default="false" />
+  <arg name="replay_test_path" default="false" />
+  <arg name="save_path" default="false" />
+
+  <arg name="usebag" default="false"/>
+  <!-- <arg name="pixel_file" default="marker_data.npy"/> -->
+  <arg name="lookup_file" default="marker_data2-lookup.npy"/>
+  <!-- <arg name="lookup_file" default="tunnel_near_marker_data-lookup-3-128.npy"/> -->
+
+  <!-- this doesn't work
+  <machine name="vm" address="racecar-vm" />
+  <machine name="car" address="racecar-51" default="true"/>
+  -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d '$(find lab6)/rviz/rrt_and_mapping.rviz'" machine="vm" /> -->
+
+  <!-- run the map -->
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find lab5)/data/$(arg which).yaml" required="true" />
+
+  <!-- Run AMCL -->
+  <include file="$(find amcl)/examples/amcl_diff.launch" if="$(arg run_amcl)"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_mapper"
+        args="0 0 0 0.0 0.0 0.0 1.0 /map /odom" unless="$(arg run_amcl)"/>
+
+<!-- Run local mapper -->
+  <node pkg="lab6" type="local_mapper.py" name="local_mapper">
+    <remap from="~global_map" to="/map" />
+    <remap from="~local_map" to="/local_map" />
+    <remap from="~scan" to="/scan" />
+  </node>
+
+<!-- Marker color thresholder -->
+  <node pkg="visual_servoing" name="color_thresholder" type="color_thresholder.py">
+    <remap from="~image" to="/camera/zed/rgb/image_rect_color" />
+    <remap from="~mask" to="/tokyo/object_mask" />
+    <!-- <param name="~object_data" value='$(find visual_servoing)/marker_data.npy' /> -->
+    <!-- <param name="~pixel_file" value='$(find visual_servoing)/tunnel_near_marker_data.npy' /> -->
+    <param name="~lookup_file" value='$(find visual_servoing)/$(arg lookup_file)'/>
+    <!-- <param name="pixel_file" value='$(find visual_servoing)/$(arg pixel_file)'/> -->
+  </node>
+
+<!-- Marker locator -->
+  <node pkg="visual_servoing" name="marker_locator" type="marker_locator.py" output="screen" required="true">
+    <remap from="~mask" to="/tokyo/object_mask" />
+    <remap from="~mask_info" to="/camera/zed/rgb/camera_info" />
+    <remap from="~location" to="/marker_poses" />
+    <remap from="~location" to="/tokyo/marker"/>
+  </node>
+
+<!-- run high level planner. TODO as this breaks -->
+  <node pkg="lab6" type="top_planner.py" name="top_planner" if="$(arg run_high_level)" output="screen">
+    <remap from="~map" to="/map" />
+    <remap from="~scan" to="/scan" />
+    <remap from="~target_pose" to="/rrt_planner/goal" />
+    <remap from="~path" to="/top_planner/robot_path" />
+    <remap from="~marker_poses" to="/marker_poses" />
+  </node>
+
+<!-- RRT Planner -->
+  <node pkg="lab6" type="rrt.py" name="rrt_planner" if="$(arg run_RRT)" output="screen">
+    <remap from="~map" to="/map" />
+    <remap from="~local_map" to="/local_map" />
+    <param name="~use_ackermann_rrt" value="1" />
+    <param name="~replan" value="on_goal_change" />
+
+    <remap from="~path" to="/robot_path" />
+  </node>
+
+  <node pkg="lab6" type="not_rrt.py" name="rrt_planner" unless="$(arg run_RRT)" output="screen">
+    <remap from="~path" to="/robot_path" />
+  </node>
+
+<!-- Path follower -->
+  <node pkg="lab5" name="path_follower_node" type="path_follower.py" if="$(arg drive)" output="screen">
+    <param name="max_speed" value="2.0" />
+    <param name="p_speed" value="3.0" />
+    <remap from="~path" to="/robot_path" />
+    <remap from="/racecar/ackermann_cmd_mux/input/navigation"
+           to="/vesc/ackermann_cmd_mux/input/navigation" />
+  </node>
+
+  <!-- Path Saver -->
+    <node pkg="lab6" name="path_saver_node" type="path_tracker.py" if="$(arg save_path)" output="screen">
+      <remap from="/lab5/actual_path" to="/robot_path" />
+    </node>
+
+  <!-- Test path of the tunnels -->
+  <node pkg="rosbag" type="play" name="player"
+        args="$(find lab5)/data/test_paths/path_correct_dir_v2.bag -k --queue=1 -d 10" if="$(arg replay_test_path)" output="screen">
+    <remap from="/robot_path"
+           to="/top_planner/robot_path" if="$(arg run_high_level)"/>
+  </node>
+
+  <node pkg="lab5" name="test_path_source" type="test_path_source.py" unless="$(arg replay_test_path)">
+    <remap from='~robot_path' to='/top_planner/robot_path' />
+  </node>
+</launch>
